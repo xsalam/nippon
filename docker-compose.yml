@@ -1,0 +1,23 @@
+version: "3.7"
+services:
+    web:
+        build:
+            context: .
+            dockerfile: ./Dockerfile
+        container_name: nippon_web
+        ports:
+        - "84:80"
+        volumes:
+        - ./app:/var/www/html
+        depends_on:
+        - db
+
+    db:
+        image: postgres
+        container_name: nippon_db
+        ports:
+        - "5434:5432"
+        environment:
+        - POSTGRES_PASSWORD=nippon
+        - POSTGRES_USER=nippon
+        - POSTGRES_DB=nippon
